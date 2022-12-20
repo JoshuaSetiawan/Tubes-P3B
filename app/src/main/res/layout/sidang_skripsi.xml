@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sidang Skripsi"
+            android:id="@+id/AmbilJudul"
             android:textSize="40dp">
 
         </TextView>
@@ -20,10 +20,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvTags">
+            android:id="@+id/AmbilTags">
 
         </TextView>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AmbilDeskripsi">
+
+        </TextView>
+
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Mark as unread"
+            android:backgroundTint="@color/grey"
+            android:textColor="@color/black">
+
+        </Button>
 
     </LinearLayout>
 
