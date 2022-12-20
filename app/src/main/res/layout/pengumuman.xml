@@ -17,13 +17,35 @@
 
         </TextView>
 
-        <EditText
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Input Filter Here"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_crop">
+
+            </ImageButton>
+
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="Input Filter Here"
+                android:background="@drawable/border">
+
+            </EditText>
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/border">
 
-        </EditText>
+        </ListView>
 
 
     </LinearLayout>
