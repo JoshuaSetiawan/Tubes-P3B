@@ -22,6 +22,9 @@ import com.android.volley.toolbox.Volley;
 import com.example.tubes_2.databinding.LoginBinding;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class LoginFragment extends Fragment {
     LoginBinding loginBinding;
     FragmentActivity fragmentActivity;
@@ -54,7 +57,11 @@ public class LoginFragment extends Fragment {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        memprosesKeluaranGagal(error);
+                        try {
+                            memprosesKeluaranGagal(error);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }){
                     @Override
@@ -83,8 +90,15 @@ public class LoginFragment extends Fragment {
         hasil+=loginOutput.token;
         Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
     }
-    public void memprosesKeluaranGagal(VolleyError error){
-        Toast.makeText(fragmentActivity,"GAGAL:"+new String(error.networkResponse.data),Toast.LENGTH_LONG).show();
+    public void memprosesKeluaranGagal(VolleyError error) throws JSONException {
+        String jsonKeluaran = new String(error.networkResponse.data);
+        JSONObject jsonObject = new JSONObject(jsonKeluaran);
+        String keluaran = jsonObject.get("errcode").toString();
+        String hasil = "Gagal Login";
+        if(keluaran.equals("E_AUTH_FAILED")){
+            hasil = "Email atau Password atau Role anda salah";
+        }
+        Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
 
     }
 
