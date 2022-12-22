@@ -13,9 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -91,14 +93,22 @@ public class LoginFragment extends Fragment {
         Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
     }
     public void memprosesKeluaranGagal(VolleyError error) throws JSONException {
-        String jsonKeluaran = new String(error.networkResponse.data);
-        JSONObject jsonObject = new JSONObject(jsonKeluaran);
-        String keluaran = jsonObject.get("errcode").toString();
-        String hasil = "Gagal Login";
-        if(keluaran.equals("E_AUTH_FAILED")){
-            hasil = "Email atau Password atau Role anda salah";
+        if(error instanceof NoConnectionError){
+            Toast.makeText(fragmentActivity,"Tidak ada koneksi internet",Toast.LENGTH_LONG).show();
+        }else if(error instanceof TimeoutError){
+            Toast.makeText(fragmentActivity,"Server memakan waktu lama untuk merespon\nCoba Lagi!",Toast.LENGTH_LONG).show();
         }
-        Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
+        else{
+            String jsonKeluaran = new String(error.networkResponse.data);
+            JSONObject jsonObject = new JSONObject(jsonKeluaran);
+            String keluaran = jsonObject.get("errcode").toString();
+            String hasil = "Gagal Login";
+            if(keluaran.equals("E_AUTH_FAILED")){
+                hasil = "Email atau Password atau Role anda salah";
+            }
+            Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
+        }
+
 
     }
 
