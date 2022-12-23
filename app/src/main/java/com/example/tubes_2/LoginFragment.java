@@ -91,6 +91,10 @@ public class LoginFragment extends Fragment {
         String hasil = "BERHASIL LOGIN\nTOKEN:";
         hasil+=loginOutput.token;
         Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
+        Bundle result = new Bundle();
+        result.putString("page","home");
+        result.putString("token",loginOutput.token);
+        getParentFragmentManager().setFragmentResult("changePage",result);
     }
     public void memprosesKeluaranGagal(VolleyError error) throws JSONException {
         if(error instanceof NoConnectionError){
