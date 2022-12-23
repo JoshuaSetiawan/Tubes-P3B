@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding activityMainBinding;
     LoginFragment loginFragment;
     HomeFragment homeFragment;
+    PengumumanFragment pengumumanFragment;
     FragmentManager fragmentManager;
     String token;
     @Override
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
         this.loginFragment = LoginFragment.newInstance();
         this.homeFragment = HomeFragment.newInstance();
+        this.pengumumanFragment = PengumumanFragment.newInstance();
         this.fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = this.fragmentManager.beginTransaction();
         fragmentTransaction.add(activityMainBinding.container.getId(),this.loginFragment).commit();
@@ -43,7 +45,11 @@ public class MainActivity extends AppCompatActivity {
         if(page.equals("home")){
             ft.remove(this.loginFragment);
             ft.add(activityMainBinding.container.getId(),this.homeFragment);
-            ft.commit();
         }
+        else if(page.equals("pengumuman")){
+            ft.remove(this.homeFragment);
+            ft.add(activityMainBinding.container.getId(),this.pengumumanFragment);
+        }
+        ft.commit();
     }
 }

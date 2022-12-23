@@ -22,6 +22,14 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         homeBinding = HomeBinding.inflate(inflater,container,false);
         View view = homeBinding.getRoot();
+        homeBinding.pengumuman.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle result = new Bundle();
+                result.putString("page","pengumuman");
+                getParentFragmentManager().setFragmentResult("changePage",result);
+            }
+        });
         return view;
     }
 
