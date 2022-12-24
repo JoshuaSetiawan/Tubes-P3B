@@ -17,6 +17,10 @@ public class AdapterPengumuman extends BaseAdapter {
         this.daftarPengumuman = daftarPengumuman;
         this.activity = activity;
     }
+    public void setDaftarPengumuman(ArrayList<DaftarPengumuman> daftarPengumuman){
+        this.daftarPengumuman = daftarPengumuman;
+        this.notifyDataSetChanged();
+    }
     @Override
     public int getCount() {
         return daftarPengumuman.size();

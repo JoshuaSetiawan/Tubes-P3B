@@ -31,12 +31,17 @@
 
 
             <EditText
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:hint="Input Filter Here"
                 android:background="@drawable/border">
 
             </EditText>
+            <ImageButton
+                android:id="@+id/refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_refresh_24"/>
 
         </LinearLayout>
 

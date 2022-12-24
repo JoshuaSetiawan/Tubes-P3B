@@ -32,9 +32,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PengumumanFragment extends Fragment {
+public class PengumumanFragment extends Fragment implements View.OnClickListener {
     PengumumanBinding pengumumanBinding;
     Gson gson;
+    ArrayList<DaftarPengumuman> daftarPengumuman;
+    AdapterPengumuman adapterPengumuman;
     public PengumumanFragment(){
 
         gson =new Gson();
@@ -45,10 +47,11 @@ public class PengumumanFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         pengumumanBinding = PengumumanBinding.inflate(inflater,container,false);
         View view = pengumumanBinding.getRoot();
-        ArrayList<DaftarPengumuman> daftarPengumuman = new ArrayList<>();
-        AdapterPengumuman adapterPengumuman = new AdapterPengumuman(daftarPengumuman,getActivity());
+        daftarPengumuman = new ArrayList<>();
+        adapterPengumuman = new AdapterPengumuman(daftarPengumuman,getActivity());
         pengumumanBinding.listview.setAdapter(adapterPengumuman);
         callAPI();
+        pengumumanBinding.refresh.setOnClickListener(this);
         return view;
     }
     public void callAPI(){
@@ -82,9 +85,8 @@ public class PengumumanFragment extends Fragment {
     public void memprosesKeluaranBerhasil(String response) throws JSONException {
         JSONObject jsonObject = new JSONObject(response);
         JSONArray jsonArray = jsonObject.getJSONArray("data");
-        ArrayList<DaftarPengumuman> daftarPengumuman = gson.fromJson(jsonArray.toString(),new TypeToken<ArrayList<DaftarPengumuman>>(){}.getType());
-        AdapterPengumuman adapterPengumuman = new AdapterPengumuman(daftarPengumuman,getActivity());
-        pengumumanBinding.listview.setAdapter(adapterPengumuman);
+        daftarPengumuman = gson.fromJson(jsonArray.toString(),new TypeToken<ArrayList<DaftarPengumuman>>(){}.getType());
+        adapterPengumuman.setDaftarPengumuman(daftarPengumuman);
     }
     public void memprosesKeluaranGagal(VolleyError error){
         Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
@@ -92,5 +94,12 @@ public class PengumumanFragment extends Fragment {
     public static PengumumanFragment newInstance(){
         PengumumanFragment pengumumanFragment = new PengumumanFragment();
         return pengumumanFragment;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v==pengumumanBinding.refresh){
+            callAPI();
+        }
     }
 }
