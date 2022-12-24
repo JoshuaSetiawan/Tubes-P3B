@@ -7,22 +7,24 @@ import android.widget.BaseAdapter;
 
 import com.example.tubes_2.databinding.ItemListPengumumanBinding;
 
+import java.util.ArrayList;
+
 public class AdapterPengumuman extends BaseAdapter {
     ItemListPengumumanBinding itemListPengumumanBinding;
-    DaftarPengumuman[] daftarPengumuman;
+    ArrayList<DaftarPengumuman> daftarPengumuman;
     Activity activity;
-    public AdapterPengumuman(DaftarPengumuman[]daftarPengumuman,Activity activity){
+    public AdapterPengumuman(ArrayList<DaftarPengumuman> daftarPengumuman, Activity activity){
         this.daftarPengumuman = daftarPengumuman;
         this.activity = activity;
     }
     @Override
     public int getCount() {
-        return daftarPengumuman.length;
+        return daftarPengumuman.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return daftarPengumuman[position];
+        return daftarPengumuman.get(position);
     }
 
     @Override
@@ -34,8 +36,12 @@ public class AdapterPengumuman extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
        itemListPengumumanBinding = ItemListPengumumanBinding.inflate(activity.getLayoutInflater());
        View view = itemListPengumumanBinding.getRoot();
-       itemListPengumumanBinding.TampilJudul.setText(this.daftarPengumuman[position].title);
-       itemListPengumumanBinding.TampilTags.setText(this.daftarPengumuman[position].tags.tag);
+       itemListPengumumanBinding.TampilJudul.setText(this.daftarPengumuman.get(position).title);
+       String tags = "";
+       for(int i=0;i<daftarPengumuman.get(position).tags.size();i++){
+           tags+=daftarPengumuman.get(position).tags.get(i).tag+" ";
+       }
+       itemListPengumumanBinding.TampilTags.setText(tags);
        return view;
     }
 }
