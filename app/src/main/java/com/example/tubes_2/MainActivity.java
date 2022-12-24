@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else if(page.equals("pengumuman")){
             ft.remove(this.homeFragment);
-            ft.add(activityMainBinding.container.getId(),this.pengumumanFragment);
+            ft.add(activityMainBinding.container.getId(),this.pengumumanFragment).addToBackStack(null);
         }
         ft.commit();
     }
