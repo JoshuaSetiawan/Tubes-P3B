@@ -2,6 +2,8 @@ package com.example.tubes_2;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,12 +52,27 @@ public class PengumumanFragment extends Fragment implements View.OnClickListener
         daftarPengumuman = new ArrayList<>();
         adapterPengumuman = new AdapterPengumuman(daftarPengumuman,getActivity());
         pengumumanBinding.listview.setAdapter(adapterPengumuman);
-        callAPI();
+        callAPI("https://ifportal.labftis.net/api/v1/announcements");
         pengumumanBinding.refresh.setOnClickListener(this);
+        pengumumanBinding.searchTitle.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                callAPI("https://ifportal.labftis.net/api/v1/announcements?filter[title]="+pengumumanBinding.searchTitle.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         return view;
     }
-    public void callAPI(){
-        String Base_URL = "https://ifportal.labftis.net/api/v1/announcements";
+    public void callAPI(String Base_URL){
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 Base_URL, new Response.Listener<String>() {
@@ -99,7 +116,9 @@ public class PengumumanFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if(v==pengumumanBinding.refresh){
-            callAPI();
+            callAPI("https://ifportal.labftis.net/api/v1/announcements");
+            pengumumanBinding.searchTitle.setText("");
+            pengumumanBinding.filterTag.setText("");
         }
     }
 }

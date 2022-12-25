@@ -18,7 +18,14 @@
             android:textAlignment="center">
 
         </TextView>
+        <EditText
+            android:id="@+id/search_title"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="Input Title Here"
+            android:background="@drawable/border">
 
+        </EditText>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,6 +40,7 @@
 
 
             <EditText
+                android:id="@+id/filter_tag"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:hint="Input Filter Here"
