@@ -40,6 +40,7 @@ public class PengumumanFragment extends Fragment implements View.OnClickListener
     Gson gson;
     ArrayList<DaftarPengumuman> daftarPengumuman;
     AdapterPengumuman adapterPengumuman;
+    String next;
     public PengumumanFragment(){
 
         gson =new Gson();
@@ -71,6 +72,7 @@ public class PengumumanFragment extends Fragment implements View.OnClickListener
 
             }
         });
+        pengumumanBinding.next.setOnClickListener(this);
         return view;
     }
     public void callAPI(String Base_URL){
@@ -103,6 +105,14 @@ public class PengumumanFragment extends Fragment implements View.OnClickListener
     }
     public void memprosesKeluaranBerhasil(String response) throws JSONException {
         JSONObject jsonObject = new JSONObject(response);
+        Object object = jsonObject.getJSONObject("metadata").get("next");
+        if(object.equals(null)){
+           pengumumanBinding.next.setVisibility(View.INVISIBLE);
+        }
+        else{
+            pengumumanBinding.next.setVisibility(View.VISIBLE);
+            next = object.toString();
+        }
         JSONArray jsonArray = jsonObject.getJSONArray("data");
         daftarPengumuman = gson.fromJson(jsonArray.toString(),new TypeToken<ArrayList<DaftarPengumuman>>(){}.getType());
         if(daftarPengumuman.size()==0){
@@ -128,6 +138,9 @@ public class PengumumanFragment extends Fragment implements View.OnClickListener
             callAPI("https://ifportal.labftis.net/api/v1/announcements");
             pengumumanBinding.searchTitle.setText("");
             pengumumanBinding.filterTag.setText("");
+        }
+        else if(v==pengumumanBinding.next){
+            callAPI("https://ifportal.labftis.net/api/v1/announcements?cursor="+next);
         }
     }
 }
