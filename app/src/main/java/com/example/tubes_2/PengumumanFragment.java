@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -73,6 +74,7 @@ public class PengumumanFragment extends Fragment implements View.OnClickListener
         return view;
     }
     public void callAPI(String Base_URL){
+        pengumumanBinding.listview.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.item_list_pengumuman,R.id.TampilJudul,new String[]{"loading...."}));
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 Base_URL, new Response.Listener<String>() {
@@ -103,7 +105,14 @@ public class PengumumanFragment extends Fragment implements View.OnClickListener
         JSONObject jsonObject = new JSONObject(response);
         JSONArray jsonArray = jsonObject.getJSONArray("data");
         daftarPengumuman = gson.fromJson(jsonArray.toString(),new TypeToken<ArrayList<DaftarPengumuman>>(){}.getType());
-        adapterPengumuman.setDaftarPengumuman(daftarPengumuman);
+        if(daftarPengumuman.size()==0){
+            pengumumanBinding.listview.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.item_list_pengumuman,R.id.TampilJudul,new String[]{"Hasil tidak ditemukan!"}));
+        }
+        else{
+            adapterPengumuman.setDaftarPengumuman(daftarPengumuman);
+            pengumumanBinding.listview.setAdapter(adapterPengumuman);
+        }
+
     }
     public void memprosesKeluaranGagal(VolleyError error){
         Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
