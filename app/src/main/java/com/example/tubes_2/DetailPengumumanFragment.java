@@ -39,9 +39,6 @@ public class DetailPengumumanFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         detailPengumumanBinding = DetailPengumumanBinding.inflate(inflater,container,false);
         View view = detailPengumumanBinding.getRoot();
-        int width = getResources().getDimensionPixelSize(R.dimen.width_dialog_fragment);
-        int height = getResources().getDimensionPixelSize(R.dimen.height_dialog_fragment);
-        getDialog().getWindow().setLayout(width,height);
         String id = getArguments().getString("id");
         gson = new Gson();
         callAPI("https://ifportal.labftis.net/api/v1/announcements/"+id);
@@ -85,6 +82,12 @@ public class DetailPengumumanFragment extends DialogFragment {
         detailPengumumanBinding.title.setText(jsonObject.getString("title"));
         detailPengumumanBinding.content.setText(jsonObject.getString("content"));
         detailPengumumanBinding.tags.setText(semuaTags);
+        String dateTime = jsonObject.getString("created_at");
+        String tanggal = dateTime.substring(0,10);
+        String jam = dateTime.substring(11,19);
+        detailPengumumanBinding.tanggalDibuat.setText(tanggal);
+        detailPengumumanBinding.jamDibuat.setText(jam);
+        detailPengumumanBinding.author.setText("Author: "+jsonObject.getJSONObject("author").getString("author"));
 
     }
     public void memprosesKeluaranGagal(VolleyError error){
