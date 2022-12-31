@@ -21,6 +21,7 @@ public class AdapterPengumuman extends BaseAdapter {
     public AdapterPengumuman(ArrayList<DaftarPengumuman> daftarPengumuman, FragmentActivity activity){
         this.daftarPengumuman = daftarPengumuman;
         this.activity = activity;
+
     }
 //    public AdapterPengumuman(Activity activity){
 //        this.daftarPengumuman = new ArrayList<>();
@@ -59,9 +60,9 @@ public class AdapterPengumuman extends BaseAdapter {
        itemListPengumumanBinding.pengumuman.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               DetailPengumumanFragment detailPengumumanFragment = new DetailPengumumanFragment();
                Bundle bundle = new Bundle();
                bundle.putString("id",daftarPengumuman.get(position).id);
+               DetailPengumumanFragment detailPengumumanFragment = new DetailPengumumanFragment();
                detailPengumumanFragment.setArguments(bundle);
                FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
                detailPengumumanFragment.show(ft,"detail");

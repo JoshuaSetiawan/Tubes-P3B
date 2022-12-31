@@ -37,27 +37,34 @@
             </EditText>
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageButton
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_crop">
+                android:src="@drawable/filter">
 
-            </ImageButton>
+            </ImageView>
 
 
-            <EditText
-                android:id="@+id/filter_tag"
-                android:layout_width="250dp"
+<!--            <EditText-->
+<!--                android:id="@+id/filter_tag"-->
+<!--                android:layout_width="250dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Input Filter Here"-->
+<!--                android:background="@drawable/border">-->
+
+<!--            </EditText>-->
+            <Button
+                android:id="@+id/filter"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Input Filter Here"
-                android:background="@drawable/border">
-
-            </EditText>
+                android:text="filter"
+                android:backgroundTint="@color/black"/>
             <ImageButton
                 android:id="@+id/refresh"
                 android:layout_width="wrap_content"
@@ -65,7 +72,12 @@
                 android:src="@drawable/ic_baseline_refresh_24"/>
 
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/filter_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
         <ListView
             android:id="@+id/listview"
             android:layout_width="wrap_content"
