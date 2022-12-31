@@ -195,12 +195,11 @@ public class PengumumanFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if(v==pengumumanBinding.refresh){
-            pengumumanBinding.searchTitle.setText("");
             SharedPreferences.Editor editor = sp.edit();
             editor.clear();
             editor.apply();
             ambilTags();
-            callAPI("https://ifportal.labftis.net/api/v1/announcements",false);
+            pengumumanBinding.searchTitle.setText("");
         }
         else if(v==pengumumanBinding.next){
             callAPI("https://ifportal.labftis.net/api/v1/announcements?cursor="+next,true);
