@@ -20,37 +20,48 @@
         </TextView>
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp">
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Search"-->
+<!--                android:textSize="20sp"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginRight="10dp">-->
 
-            </TextView>
+<!--            </TextView>-->
             <EditText
                 android:id="@+id/search_title"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:hint="Input Title Here"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:drawableRight="@drawable/ic_baseline_search_24">
 
             </EditText>
+            <ImageButton
+                android:id="@+id/refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_refresh_24"/>
         </LinearLayout>
 
 
         <LinearLayout
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/filter">
+<!--            <ImageView-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/filter">-->
 
-            </ImageView>
-
-
+<!--            </ImageView>-->
 <!--            <EditText-->
 <!--                android:id="@+id/filter_tag"-->
 <!--                android:layout_width="250dp"-->
@@ -64,13 +75,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="filter"
-                android:backgroundTint="@color/black"/>
-            <ImageButton
-                android:id="@+id/refresh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_refresh_24"/>
-
+                android:backgroundTint="@color/black"
+                android:drawableRight="@drawable/filter"/>
         </LinearLayout>
         <TextView
             android:id="@+id/filter_apply"
