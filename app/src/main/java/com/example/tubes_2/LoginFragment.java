@@ -27,102 +27,56 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements LoginContract.view {
     LoginBinding loginBinding;
-    FragmentActivity fragmentActivity;
-    Gson gson;
-    public LoginFragment(){
-
-    }
-
+    LoginContract.presenter presenter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         loginBinding = LoginBinding.inflate(inflater,container,false);
         View view = loginBinding.getRoot();
-        fragmentActivity = getActivity();
-        gson = new Gson();
+        presenter = new PresenterLogin(this,new ModelLogin(getActivity()),getActivity());
         loginBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginBinding.btnLogin.setEnabled(false);
-                loginBinding.etEmail.setEnabled(false);
-                loginBinding.etPassword.setEnabled(false);
-                loginBinding.etRole.setEnabled(false);
-                String Base_URL = "https://ifportal.labftis.net/api/v1/authenticate";
-                LoginInput loginInput =new LoginInput(loginBinding.etEmail.getText().toString(),
-                        loginBinding.etPassword.getText().toString(),loginBinding.etRole.getText().toString());
-                String inputJson = gson.toJson(loginInput);
-                RequestQueue queue = Volley.newRequestQueue(fragmentActivity);
-                StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                        Base_URL, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        memprosesKeluaranBerhasil(response);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        try {
-                            memprosesKeluaranGagal(error);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }){
-                    @Override
-                    public byte[] getBody() throws AuthFailureError {
-                        return inputJson.getBytes();
-                    }
-
-                    @Override
-                    public String getBodyContentType() {
-                        return "application/json";
-                    }
-                };
-                queue.add(stringRequest);
+                presenter.buttonClick();
             }
         });
         return view;
-
     }
     public static LoginFragment newInstance(){
         LoginFragment fragment = new LoginFragment();
         return fragment;
     }
-    public void memprosesKeluaranBerhasil(String response){
-        LoginOutput loginOutput = gson.fromJson(response,LoginOutput.class);
-        String hasil = "BERHASIL LOGIN\nTOKEN:";
-        hasil+=loginOutput.token;
-        Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
-        Bundle result = new Bundle();
-        result.putString("page","home");
-        result.putString("token",loginOutput.token);
-        getParentFragmentManager().setFragmentResult("changePage",result);
+
+    @Override
+    public void disabledInput(){
+        loginBinding.btnLogin.setEnabled(false);
+        loginBinding.etEmail.setEnabled(false);
+        loginBinding.etPassword.setEnabled(false);
+        loginBinding.etRole.setEnabled(false);
     }
-    public void memprosesKeluaranGagal(VolleyError error) throws JSONException {
-        if(error instanceof NoConnectionError){
-            Toast.makeText(fragmentActivity,"Tidak ada koneksi internet",Toast.LENGTH_LONG).show();
-        }else if(error instanceof TimeoutError){
-            Toast.makeText(fragmentActivity,"Server memakan waktu lama untuk merespon\nCoba Lagi!",Toast.LENGTH_LONG).show();
-        }
-        else{
-            String jsonKeluaran = new String(error.networkResponse.data);
-            JSONObject jsonObject = new JSONObject(jsonKeluaran);
-            String keluaran = jsonObject.get("errcode").toString();
-            String hasil = "Gagal Login";
-            if(keluaran.equals("E_AUTH_FAILED")){
-                hasil = "Email atau Password atau Role anda salah";
-            }
-            Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
-        }
+    @Override
+    public void enabledInput(){
         loginBinding.btnLogin.setEnabled(true);
         loginBinding.etEmail.setEnabled(true);
         loginBinding.etPassword.setEnabled(true);
         loginBinding.etRole.setEnabled(true);
-
-
     }
 
+    @Override
+    public String getEmail() {
+        return loginBinding.etEmail.getText().toString();
+    }
+
+    @Override
+    public String getPassword() {
+        return loginBinding.etPassword.getText().toString();
+    }
+
+    @Override
+    public String getRole() {
+        return loginBinding.etRole.getText().toString();
+    }
 
 }
