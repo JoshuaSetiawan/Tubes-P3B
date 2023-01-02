@@ -45,6 +45,10 @@ public class LoginFragment extends Fragment {
         loginBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loginBinding.btnLogin.setEnabled(false);
+                loginBinding.etEmail.setEnabled(false);
+                loginBinding.etPassword.setEnabled(false);
+                loginBinding.etRole.setEnabled(false);
                 String Base_URL = "https://ifportal.labftis.net/api/v1/authenticate";
                 LoginInput loginInput =new LoginInput(loginBinding.etEmail.getText().toString(),
                         loginBinding.etPassword.getText().toString(),loginBinding.etRole.getText().toString());
@@ -112,6 +116,10 @@ public class LoginFragment extends Fragment {
             }
             Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
         }
+        loginBinding.btnLogin.setEnabled(true);
+        loginBinding.etEmail.setEnabled(true);
+        loginBinding.etPassword.setEnabled(true);
+        loginBinding.etRole.setEnabled(true);
 
 
     }
