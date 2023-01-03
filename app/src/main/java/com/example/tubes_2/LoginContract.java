@@ -6,11 +6,12 @@ import org.json.JSONException;
 
 public interface LoginContract {
     interface model{
-        void callAPI(String email,String password,String role,LoginContract.model.OnFailedListener notSure);
-        void processingSuccesResponse(String response);
-        void processingFailedResponse(VolleyError error) throws JSONException;
-        interface OnFailedListener{
-            void openInput();
+        void callAPI(String email,String password,String role,LoginContract.model.OnFinishedListener notSure);
+        String processingSuccesResponse(String response);
+        String processingFailedResponse(VolleyError error) throws JSONException;
+        interface OnFinishedListener{
+            void onSuccess(String hasil);
+            void onFailed(String hasil);
         }
     }
     interface presenter{
@@ -22,5 +23,6 @@ public interface LoginContract {
         String getEmail();
         String getPassword();
         String getRole();
+        void showToast(String hasil);
     }
 }

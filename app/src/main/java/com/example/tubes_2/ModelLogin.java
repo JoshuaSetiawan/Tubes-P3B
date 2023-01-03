@@ -1,7 +1,6 @@
 package com.example.tubes_2;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
@@ -29,7 +28,7 @@ public class ModelLogin implements LoginContract.model{
         gson = new Gson();
     }
     @Override
-    public void callAPI(String email,String password,String role,LoginContract.model.OnFailedListener onFailedListener) {
+    public void callAPI(String email,String password,String role,LoginContract.model.OnFinishedListener onFinishedListener) {
         String Base_URL = "https://ifportal.labftis.net/api/v1/authenticate";
         LoginInput loginInput =new LoginInput(email,
                 password,role);
@@ -39,17 +38,19 @@ public class ModelLogin implements LoginContract.model{
                 Base_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-               processingSuccesResponse(response);
+               String hasil =processingSuccesResponse(response);
+               onFinishedListener.onSuccess(hasil);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 try {
-                    processingFailedResponse(error);
+                    String hasil = processingFailedResponse(error);
+                    onFinishedListener.onFailed(hasil);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                onFailedListener.openInput();
+
             }
         }){
             @Override
@@ -68,33 +69,39 @@ public class ModelLogin implements LoginContract.model{
 
 
     @Override
-    public void processingSuccesResponse(String response) {
+    public String processingSuccesResponse(String response) {
         LoginOutput loginOutput = gson.fromJson(response,LoginOutput.class);
         String hasil = "BERHASIL LOGIN\nTOKEN:";
         hasil+=loginOutput.token;
-        Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
         Bundle result = new Bundle();
         result.putString("page","home");
         result.putString("token",loginOutput.token);
         fragmentActivity.getSupportFragmentManager().setFragmentResult("changePage",result);
+//        Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
+        return hasil;
+
     }
 
     @Override
-    public void processingFailedResponse(VolleyError error) throws JSONException {
+    public String processingFailedResponse(VolleyError error) throws JSONException {
+        String hasil="";
         if(error instanceof NoConnectionError){
-            Toast.makeText(fragmentActivity,"Tidak ada koneksi internet",Toast.LENGTH_LONG).show();
+//            Toast.makeText(fragmentActivity,"Tidak ada koneksi internet",Toast.LENGTH_LONG).show();
+            hasil="Tidak ada koneksi internet";
         }else if(error instanceof TimeoutError){
-            Toast.makeText(fragmentActivity,"Server memakan waktu lama untuk merespon\nCoba Lagi!",Toast.LENGTH_LONG).show();
+//            Toast.makeText(fragmentActivity,"Server memakan waktu lama untuk merespon\nCoba Lagi!",Toast.LENGTH_LONG).show();
+            hasil= "Server memakan waktu lama untuk merespon\nCoba Lagi!";
         }
         else{
             String jsonKeluaran = new String(error.networkResponse.data);
             JSONObject jsonObject = new JSONObject(jsonKeluaran);
             String keluaran = jsonObject.get("errcode").toString();
-            String hasil = "Gagal Login";
+            hasil = "Gagal Login";
             if(keluaran.equals("E_AUTH_FAILED")){
                 hasil = "Email atau Password atau Role anda salah";
             }
-            Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
+//            Toast.makeText(fragmentActivity,hasil,Toast.LENGTH_LONG).show();
         }
+        return hasil;
     }
 }

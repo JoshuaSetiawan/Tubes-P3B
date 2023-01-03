@@ -35,7 +35,7 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         loginBinding = LoginBinding.inflate(inflater,container,false);
         View view = loginBinding.getRoot();
-        presenter = new PresenterLogin(this,new ModelLogin(getActivity()),getActivity());
+        presenter = new PresenterLogin(this,getActivity());
         loginBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +77,11 @@ public class LoginFragment extends Fragment implements LoginContract.view {
     @Override
     public String getRole() {
         return loginBinding.etRole.getText().toString();
+    }
+
+    @Override
+    public void showToast(String hasil) {
+        Toast.makeText(getActivity(),hasil,Toast.LENGTH_LONG).show();
     }
 
 }
