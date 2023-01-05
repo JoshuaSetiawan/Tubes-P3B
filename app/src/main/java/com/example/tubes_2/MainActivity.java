@@ -17,7 +17,10 @@ public class MainActivity extends AppCompatActivity {
     LoginFragment loginFragment;
     HomeFragment homeFragment;
     PengumumanFragment pengumumanFragment;
+    FRSFragment FRSfragment;
     FragmentManager fragmentManager;
+    SemesterFragment semesterFragment;
+    TambahMatkulFragment tambahMatkulFragment;
     String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         this.loginFragment = LoginFragment.newInstance();
         this.homeFragment = HomeFragment.newInstance();
         this.pengumumanFragment = PengumumanFragment.newInstance();
+        this.FRSfragment = FRSfragment.newInstance();
+        semesterFragment = new SemesterFragment();
+        this.tambahMatkulFragment = new TambahMatkulFragment();
         this.fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = this.fragmentManager.beginTransaction();
         fragmentTransaction.add(activityMainBinding.container.getId(),this.loginFragment).commit();
@@ -36,6 +42,19 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                         token = result.getString("token");
+                        if(result.getString("page").equals("detailSemester")){
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("tahundansem",result.getInt("tahundansem"));
+                            bundle.putString("heading",result.getString("heading"));
+                            semesterFragment.setArguments(bundle);
+                        }
+                        else if(result.getString("page").equals("tambahMatkul")){
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("tahundansem",result.getInt("tahundansem"));
+                            bundle.putString("heading",result.getString("heading"));
+                            tambahMatkulFragment.setArguments(bundle);
+                        }
+
                         changePage(result.getString("page"));
                     }
                 });
@@ -49,6 +68,18 @@ public class MainActivity extends AppCompatActivity {
         else if(page.equals("pengumuman")){
             ft.remove(this.homeFragment);
             ft.add(activityMainBinding.container.getId(),this.pengumumanFragment).addToBackStack(null);
+        }
+        else if(page.equals("frs")){
+            ft.remove(this.homeFragment);
+            ft.add(activityMainBinding.container.getId(),this.FRSfragment).addToBackStack(null);
+        }
+        else if(page.equals("detailSemester")){
+            ft.remove(this.FRSfragment);
+            ft.add(activityMainBinding.container.getId(),this.semesterFragment).addToBackStack(null);
+        }
+        else if(page.equals("tambahMatkul")){
+            ft.remove(this.FRSfragment);
+            ft.add(activityMainBinding.container.getId(),this.tambahMatkulFragment).addToBackStack(null);
         }
         ft.commit();
     }

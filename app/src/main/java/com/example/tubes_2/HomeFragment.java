@@ -30,6 +30,14 @@ public class HomeFragment extends Fragment {
                 getParentFragmentManager().setFragmentResult("changePage",result);
             }
         });
+        homeBinding.frs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle result = new Bundle();
+                result.putString("page","frs");
+                getParentFragmentManager().setFragmentResult("changePage",result);
+            }
+        });
         return view;
     }
 
