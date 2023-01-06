@@ -2,21 +2,42 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pertemuan"
-        android:textSize="50dp"
-        android:id="@+id/txt"/>
-    
-<!--    <ListView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/border"/>-->
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="30dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_margin="30dp">
 
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:text="Pertemuan"
+                android:textColor="@color/lightBlue"
+                android:textSize="40dp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold|italic"
+                android:shadowColor="#000000"
+                android:shadowDx="1.5"
+                android:shadowDy="1.3"
+                android:shadowRadius="1.6"
+                android:textAllCaps="true"></TextView>
+        </LinearLayout>
+        <ListView
+            android:id = "@+id/lst_frs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        </ListView>
+    </LinearLayout>
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -25,7 +46,5 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         />
-
-
-
 </RelativeLayout>
+
