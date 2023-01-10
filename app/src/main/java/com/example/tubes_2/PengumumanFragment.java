@@ -99,7 +99,7 @@ public class PengumumanFragment extends Fragment implements View.OnClickListener
                 }
             }
         }
-//        Toast.makeText(getActivity(),Base_URL,Toast.LENGTH_LONG).show();
+
         pengumumanBinding.listview.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.item_list_pengumuman,R.id.TampilJudul,new String[]{"loading...."}));
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest = new StringRequest(Request.Method.GET,

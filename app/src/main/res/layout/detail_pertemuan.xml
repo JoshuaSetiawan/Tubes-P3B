@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="30dp"
+            android:layout_margin="10dp"
             android:fontFamily="sans-serif-medium"
             android:shadowColor="#000000"
             android:shadowDx="1.5"
@@ -74,30 +74,6 @@
                 android:fontFamily="sans-serif-medium"
                 android:paddingBottom="10dp"></TextView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="@color/grey"
-                    android:text="Accept"
-                    android:textColor="@color/black"
-                    android:layout_marginRight="10dp"></Button>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="@color/grey"
-                    android:text="Decline"
-                    android:textColor="@color/black"></Button>
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

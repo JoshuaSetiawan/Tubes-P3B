@@ -57,6 +57,18 @@ class Author{
         this.author =author;
     }
 }
+class Pertemuan{
+    String id;
+    String title;
+    String started_datetime;
+    String end_datetime;
+    public Pertemuan(String id,String title,String started_datetime,String end_datetime){
+        this.id = id;
+        this.title = title;
+        this.started_datetime = started_datetime;
+        this.end_datetime = end_datetime;
+    }
+}
 //class Meta{
 //    String next;
 //    public Meta(String next){
