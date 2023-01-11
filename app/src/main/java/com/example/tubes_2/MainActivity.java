@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     TambahMatkulFragment tambahMatkulFragment;
     PertemuanFragment pertemuanFragment;
     DaftarUndanganFragment daftarUndanganFragment;
+    TambahPertemuanFragment tambahPertemuanFragment;
     String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         this.tambahMatkulFragment = new TambahMatkulFragment();
         this.pertemuanFragment = new PertemuanFragment();
         this.daftarUndanganFragment = new DaftarUndanganFragment();
+        this.tambahPertemuanFragment = new TambahPertemuanFragment();
         this.fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = this.fragmentManager.beginTransaction();
         fragmentTransaction.add(activityMainBinding.container.getId(),this.loginFragment).commit();
@@ -92,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
         else if(page.equals("daftarUndangan")){
             ft.remove(this.pertemuanFragment);
             ft.add(activityMainBinding.container.getId(),this.daftarUndanganFragment).addToBackStack(null);
+        }
+        else if(page.equals("tambahPertemuan")){
+            ft.remove(this.pertemuanFragment);
+            ft.add(activityMainBinding.container.getId(),this.tambahPertemuanFragment).addToBackStack(null);
         }
         ft.commit();
     }

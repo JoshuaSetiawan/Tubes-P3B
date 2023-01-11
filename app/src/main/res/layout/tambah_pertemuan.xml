@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/judulPertemuan"
             android:text="Tambah Pertemuan"
-            android:textSize="40dp">
+            android:textSize="30dp">
 
         </TextView>
 
@@ -22,42 +22,101 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Judul"
-            android:textSize="30dp">
+            android:textSize="20dp">
 
         </TextView>
 
 
         <EditText
+            android:id="@+id/title"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/border">
+            android:background="@drawable/border"
+            android:textSize="10dp"
+
+            >
 
         </EditText>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jadwal"
-            android:textSize="30dp">
+            android:text="Deskripsi"
+            android:textSize="20dp">
 
         </TextView>
 
         <EditText
+            android:id="@+id/deskripsi"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
-            android:layout_marginBottom="10dp">
+            android:textSize="10dp">
 
         </EditText>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilih Tanggal Mulai"
+            android:textSize="20dp">
+        </TextView>
 
-        <EditText
+        <TextView
+            android:id="@+id/start_date"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:textSize="10dp">
 
-        </EditText>
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilih Jam Mulai"
+            android:textSize="20dp">
+        </TextView>
 
+        <TextView
+            android:id="@+id/jam_mulai"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:layout_marginBottom="10dp"
+            android:textSize="10dp">
+
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilih Tanggal Selesai"
+            android:textSize="20dp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/end_date"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:layout_marginBottom="10dp"
+            android:textSize="10dp">
+
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilih Jam Selesai"
+            android:textSize="20dp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/jam_selesai"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:layout_marginBottom="10dp"
+            android:textSize="10dp">
+
+        </TextView>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -71,12 +130,15 @@
 
             </TextView>
 
-            <EditText
-                android:layout_width="160dp"
+            <Spinner
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/border">
-
-            </EditText>
+                android:id="@+id/list"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/spinner_background"
+                />
 
         </LinearLayout>
 
@@ -88,32 +150,13 @@
             android:text="Lihat Jadwal Dosen">
 
         </Button>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Deskripsi"
-            android:textSize="30dp">
-
-        </TextView>
-
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border">
-
-        </EditText>
-
         <Button
+            android:id="@+id/simpan"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/grey"
             android:textColor="@color/black"
             android:text="Simpan">
-
         </Button>
-
     </LinearLayout>
-
-
 </RelativeLayout>

@@ -41,6 +41,14 @@ public class PertemuanFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         pertemuanBinding = PertemuanBinding.inflate(inflater,container,false);
         View view = pertemuanBinding.getRoot();
+        pertemuanBinding.tambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle result = new Bundle();
+                result.putString("page","tambahPertemuan");
+                getParentFragmentManager().setFragmentResult("changePage",result);
+            }
+        });
         adapterPertemuan = new AdapterPertemuan(getActivity());
         pertemuanBinding.lstPert.setAdapter(adapterPertemuan);
         Calendar calendar = Calendar.getInstance();
