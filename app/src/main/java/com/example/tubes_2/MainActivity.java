@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     SemesterFragment semesterFragment;
     TambahMatkulFragment tambahMatkulFragment;
     PertemuanFragment pertemuanFragment;
+    DaftarUndanganFragment daftarUndanganFragment;
     String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         this.semesterFragment = new SemesterFragment();
         this.tambahMatkulFragment = new TambahMatkulFragment();
         this.pertemuanFragment = new PertemuanFragment();
+        this.daftarUndanganFragment = new DaftarUndanganFragment();
         this.fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = this.fragmentManager.beginTransaction();
         fragmentTransaction.add(activityMainBinding.container.getId(),this.loginFragment).commit();
@@ -86,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
         else if(page.equals("pertemuan")){
             ft.remove(this.homeFragment);
             ft.add(activityMainBinding.container.getId(),this.pertemuanFragment).addToBackStack(null);
+        }
+        else if(page.equals("daftarUndangan")){
+            ft.remove(this.pertemuanFragment);
+            ft.add(activityMainBinding.container.getId(),this.daftarUndanganFragment).addToBackStack(null);
         }
         ft.commit();
     }

@@ -71,6 +71,14 @@ public class PertemuanFragment extends Fragment {
                 callAPI("https://ifportal.labftis.net/api/v1/appointments/start-date/"+pertemuanBinding.datePickerStart.getText().toString()+"/end-date/"+pertemuanBinding.datePickerEnd.getText().toString());
             }
         });
+        pertemuanBinding.undangan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle result = new Bundle();
+                result.putString("page","daftarUndangan");
+                getParentFragmentManager().setFragmentResult("changePage",result);
+            }
+        });
         return view;
     }
     public String versiString(int i){
@@ -88,7 +96,11 @@ public class PertemuanFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    memprosesKeluaranBerhasil(response);
+
+                        memprosesKeluaranBerhasil(response);
+
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -142,5 +154,4 @@ public class PertemuanFragment extends Fragment {
         pertemuanBinding.lstPert.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.simple_item_spinner,R.id.isi,new String[]{"Gagal!"}));
         pertemuanBinding.tombolCari.setEnabled(true);
     }
-
 }

@@ -40,6 +40,7 @@ public class DetailPertemuan extends DialogFragment {
         Bundle bundle = getArguments();
         callAPI("https://ifportal.labftis.net/api/v1/appointments/"+bundle.getString("id"),"atribut");
         callAPI("https://ifportal.labftis.net/api/v1/appointments/"+bundle.getString("id")+"/participants","partisipan");
+
         return view;
     }
     public synchronized void callAPI(String Base_URL,String ngapain){
@@ -84,7 +85,7 @@ public class DetailPertemuan extends DialogFragment {
         String tanggal_end = jsonObject.getString("end_datetime");
         String deskripsi = jsonObject.getString("description");
         binding.title.setText(title);
-        binding.organizer.setText("Organizer: "+organizer);
+        binding.organizer.setText(organizer);
         binding.tanggalStart.setText("Start: "+tanggal_start);
         binding.tanggalEnd.setText("End: "+tanggal_end);
         binding.deskripsi.setText(deskripsi);
@@ -106,10 +107,11 @@ public class DetailPertemuan extends DialogFragment {
             partisipan+=jsonArray.getJSONObject(i).getString("name")+",";
         }
         if(jsonArray.length()==0){
-            binding.partisipan.setText("Partisipan:");
+
         }
         else{
-            binding.partisipan.setText("Partisipan:"+partisipan.substring(0,partisipan.length()-1));
+            binding.partisipan.setText(partisipan.substring(0,partisipan.length()-1));
         }
     }
+
 }

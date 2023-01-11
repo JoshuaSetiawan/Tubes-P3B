@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/rounded_border"
     android:orientation="vertical"
-    android:id="@+id/container_pertemuan">
+    android:id="@+id/container_pertemuan"
+    >
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"

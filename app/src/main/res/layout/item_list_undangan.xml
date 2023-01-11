@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/rounded_border"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:id="@+id/container_undangan">
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -60,20 +60,6 @@
         android:paddingBottom="10dp"></TextView>
     <TextView
         android:textStyle="bold"
-        android:text="Partisipan :"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:paddingBottom="10dp"></TextView>
-    <TextView
-        android:id="@+id/partisipan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:paddingBottom="10dp"></TextView>
-
-    <TextView
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
@@ -86,4 +72,31 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:paddingBottom="10dp"></TextView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:backgroundTint="@color/grey"
+            android:text="Accept"
+            android:textColor="@color/black"
+            android:layout_marginRight="10dp"></Button>
+
+        <Button
+            android:id="@+id/decline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="0.5"
+            android:backgroundTint="@color/grey"
+            android:text="Decline"
+            android:textColor="@color/black"></Button>
+    </LinearLayout>
+
 </LinearLayout>
